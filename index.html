@@ -4,49 +4,150 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>OTONADI – Showroom Mobil Bali</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
     body { font-family: 'Inter', sans-serif; }
+
+    /* ─── Navbar ─── */
+    .navbar-logo {
+      height: 50px;
+      width: auto;
+      margin-right: 10px;
+    }
+
+    /* ─── Hero ─── */
     .hero-bg {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0f172a 100%);
     }
-    .card-hover {
+
+    /* ─── Car Cards ─── */
+    .car-card {
+      border-radius: 1rem;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .card-hover:hover {
+    .car-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.14);
     }
-    .img-zoom img {
-      transition: transform 0.5s ease;
+
+    /* ─── Carousel fixed height ─── */
+    .car-carousel .carousel-inner,
+    .car-carousel .carousel-item {
+      height: 240px;
     }
-    .img-zoom:hover img {
-      transform: scale(1.05);
+    .car-carousel .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Carousel arrows – dark rounded pill */
+    .car-carousel .carousel-control-prev,
+    .car-carousel .carousel-control-next {
+      width: 36px;
+      height: 36px;
+      background: rgba(15, 23, 42, 0.65);
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 1;
+    }
+    .car-carousel .carousel-control-prev { left: 10px; }
+    .car-carousel .carousel-control-next { right: 10px; }
+    .car-carousel .carousel-control-prev-icon,
+    .car-carousel .carousel-control-next-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Carousel indicators – small dots */
+    .car-carousel .carousel-indicators {
+      bottom: 6px;
+      margin: 0;
+    }
+    .car-carousel .carousel-indicators [data-bs-target] {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #fff;
+      opacity: 0.6;
+      border: none;
+    }
+    .car-carousel .carousel-indicators .active {
+      opacity: 1;
+      background-color: #f59e0b;
+    }
+
+    /* ─── WA Button ─── */
+    .wa-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      background-color: #22c55e;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.875rem;
+      padding: 12px 0;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: background-color 0.2s;
+    }
+    .wa-btn:hover { background-color: #16a34a; color: #fff; }
+
+    /* ─── Feature list checkmark ─── */
+    .feature-icon { color: #f59e0b; flex-shrink: 0; }
+
+    /* Badge overrides */
+    .badge-suv   { background: #fef3c7; color: #b45309; }
+    .badge-mpv   { background: #e0f2fe; color: #0369a1; }
+
+    @media (max-width: 767px) {
+      .car-carousel .carousel-inner,
+      .car-carousel .carousel-item { height: 200px; }
     }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-  <!-- NAVBAR -->
+  <!-- ══════════════════ NAVBAR ══════════════════ -->
   <nav class="bg-white shadow-sm sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-2">
+    <div class="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
+
+      <!-- Logo + Brand -->
+      <a href="#" class="flex items-center">
+        <img src="images/logo.jpg" alt="OTONADI Logo" class="navbar-logo" />
         <span class="text-2xl font-bold tracking-widest text-slate-900">OTO<span class="text-amber-500">NADI</span></span>
-      </div>
+      </a>
+
+      <!-- Nav links (desktop) -->
       <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-600">
         <a href="#koleksi" class="hover:text-amber-500 transition">Koleksi</a>
         <a href="#tentang" class="hover:text-amber-500 transition">Tentang</a>
         <a href="#kontak" class="hover:text-amber-500 transition">Kontak</a>
       </div>
-      <a href="https://wa.me/6285934613737" target="_blank"
+
+      <!-- CTA -->
+      <a href="https://wa.me/6285934613737?text=Halo%20Otonadi%2C%20saya%20ingin%20tanya-tanya%20soal%20mobil%20yang%20tersedia."
+         target="_blank"
          class="bg-green-500 hover:bg-green-600 text-white text-sm font-semibold px-4 py-2 rounded-full transition">
         Hubungi Kami
       </a>
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- ══════════════════ HERO ══════════════════ -->
   <section class="hero-bg text-white py-24 px-6">
     <div class="max-w-4xl mx-auto text-center">
       <p class="text-amber-400 text-sm font-semibold uppercase tracking-widest mb-3">Showroom Mobil Terpercaya</p>
@@ -63,90 +164,180 @@
     </div>
   </section>
 
-  <!-- KOLEKSI -->
+  <!-- ══════════════════ KOLEKSI ══════════════════ -->
   <section id="koleksi" class="py-20 px-6">
     <div class="max-w-6xl mx-auto">
+
       <div class="text-center mb-12">
         <p class="text-amber-500 text-sm font-semibold uppercase tracking-widest mb-2">Koleksi Kami</p>
         <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Pilihan Mobil Unggulan</h2>
         <p class="text-gray-500 mt-3">Unit terawat, siap pakai, harga terbaik.</p>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-        <!-- Card: Honda HR-V -->
-        <div class="bg-white rounded-2xl overflow-hidden shadow-md card-hover">
-          <div class="overflow-hidden img-zoom h-64">
-            <img src="images/hrv.jpg" alt="Honda HR-V" class="w-full h-full object-cover" />
+        <!-- ── Card: Honda HR-V ── -->
+        <div class="car-card">
+          <!-- Carousel -->
+          <div id="carousel-hrv" class="carousel slide car-carousel" data-bs-ride="false">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carousel-hrv" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#carousel-hrv" data-bs-slide-to="1"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="images/hrv.jpg" alt="Honda HR-V foto 1" />
+              </div>
+              <div class="carousel-item">
+                <img src="images/hrv2.jpg" alt="Honda HR-V foto 2" />
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-hrv" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-hrv" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
           </div>
-          <div class="p-6">
-            <div class="flex items-center justify-between mb-1">
+
+          <!-- Info -->
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-2">
               <h3 class="text-xl font-bold text-slate-900">Honda HR-V</h3>
-              <span class="bg-amber-100 text-amber-600 text-xs font-semibold px-3 py-1 rounded-full">SUV</span>
+              <span class="badge-suv text-xs font-semibold px-3 py-1 rounded-full">SUV</span>
             </div>
             <p class="text-gray-500 text-sm mb-4">Compact SUV stylish dengan teknologi terkini, nyaman untuk segala medan.</p>
             <ul class="text-sm text-gray-600 space-y-1 mb-5">
               <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <svg class="w-4 h-4 feature-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 Mesin 1.5L VTEC Turbo
               </li>
               <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <svg class="w-4 h-4 feature-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 Transmisi CVT Otomatis
               </li>
               <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <svg class="w-4 h-4 feature-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 Honda Sensing Safety Suite
               </li>
             </ul>
-            <a href="https://wa.me/6285934613737?text=Halo%20OTONADI%2C%20saya%20tertarik%20dengan%20Honda%20HR-V.%20Bisa%20minta%20info%20lebih%20lanjut%3F"
-               target="_blank"
-               class="flex items-center justify-center gap-2 w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-xl transition text-sm">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              Tanya via WhatsApp
+            <a href="https://wa.me/6285934613737?text=Halo%20Otonadi%2C%20saya%20ingin%20bertanya%20tentang%20mobil%20Honda%20HR-V%20ini."
+               target="_blank" class="wa-btn">
+              <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Hubungi WA
             </a>
           </div>
         </div>
 
-        <!-- Card: Toyota Fortuner -->
-        <div class="bg-white rounded-2xl overflow-hidden shadow-md card-hover">
-          <div class="overflow-hidden img-zoom h-64">
-            <img src="images/fortuner.jpg" alt="Toyota Fortuner" class="w-full h-full object-cover" />
+        <!-- ── Card: Toyota Fortuner ── -->
+        <div class="car-card">
+          <div id="carousel-fortuner" class="carousel slide car-carousel" data-bs-ride="false">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carousel-fortuner" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#carousel-fortuner" data-bs-slide-to="1"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="images/fortuner.jpg" alt="Toyota Fortuner foto 1" />
+              </div>
+              <div class="carousel-item">
+                <img src="images/fortuner2.jpg" alt="Toyota Fortuner foto 2" />
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-fortuner" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-fortuner" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
           </div>
-          <div class="p-6">
-            <div class="flex items-center justify-between mb-1">
+
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-2">
               <h3 class="text-xl font-bold text-slate-900">Toyota Fortuner</h3>
-              <span class="bg-slate-100 text-slate-600 text-xs font-semibold px-3 py-1 rounded-full">SUV</span>
+              <span class="badge-suv text-xs font-semibold px-3 py-1 rounded-full">SUV</span>
             </div>
             <p class="text-gray-500 text-sm mb-4">SUV tangguh berkarakter kuat, ideal untuk petualangan maupun kebutuhan harian.</p>
             <ul class="text-sm text-gray-600 space-y-1 mb-5">
               <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <svg class="w-4 h-4 feature-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 Mesin 2.4L Diesel Turbo
               </li>
               <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <svg class="w-4 h-4 feature-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
                 4x4 All-Wheel Drive
               </li>
               <li class="flex items-center gap-2">
-                <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                7-Seater dengan Kabin Luas
+                <svg class="w-4 h-4 feature-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                7-Seater Kabin Luas
               </li>
             </ul>
-            <a href="https://wa.me/6285934613737?text=Halo%20OTONADI%2C%20saya%20tertarik%20dengan%20Toyota%20Fortuner.%20Bisa%20minta%20info%20lebih%20lanjut%3F"
-               target="_blank"
-               class="flex items-center justify-center gap-2 w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-xl transition text-sm">
-              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              Tanya via WhatsApp
+            <a href="https://wa.me/6285934613737?text=Halo%20Otonadi%2C%20saya%20ingin%20bertanya%20tentang%20mobil%20Toyota%20Fortuner%20ini."
+               target="_blank" class="wa-btn">
+              <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Hubungi WA
             </a>
           </div>
         </div>
 
-      </div>
+        <!-- ── Card: Toyota Innova (BARU) ── -->
+        <div class="car-card">
+          <div id="carousel-innova" class="carousel slide car-carousel" data-bs-ride="false">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carousel-innova" data-bs-slide-to="0" class="active"></button>
+              <button type="button" data-bs-target="#carousel-innova" data-bs-slide-to="1"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="images/innova.jpg" alt="Toyota Innova foto 1" />
+              </div>
+              <div class="carousel-item">
+                <img src="images/innova2.jpg" alt="Toyota Innova foto 2" />
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-innova" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carousel-innova" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+
+          <div class="p-5">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xl font-bold text-slate-900">Toyota Innova</h3>
+              <span class="badge-mpv text-xs font-semibold px-3 py-1 rounded-full">MPV</span>
+            </div>
+            <!-- Harga -->
+            <p class="text-amber-500 font-bold text-base mb-1">Rp 450.000.000 <span class="text-gray-400 font-normal text-sm">(Nego)</span></p>
+            <p class="text-gray-500 text-sm mb-4">Kondisi sangat terawat, tangan pertama, pajak panjang, siap luar kota.</p>
+            <ul class="text-sm text-gray-600 space-y-1 mb-5">
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 feature-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                Tangan Pertama
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 feature-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                Pajak Panjang
+              </li>
+              <li class="flex items-center gap-2">
+                <svg class="w-4 h-4 feature-icon" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                Siap Luar Kota
+              </li>
+            </ul>
+            <a href="https://wa.me/6285934613737?text=Halo%20Otonadi%2C%20saya%20ingin%20bertanya%20tentang%20mobil%20Toyota%20Innova%20ini."
+               target="_blank" class="wa-btn">
+              <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Hubungi WA
+            </a>
+          </div>
+        </div>
+
+      </div><!-- /grid -->
     </div>
   </section>
 
-  <!-- TENTANG -->
+  <!-- ══════════════════ TENTANG ══════════════════ -->
   <section id="tentang" class="bg-slate-900 text-white py-20 px-6">
     <div class="max-w-4xl mx-auto text-center">
       <p class="text-amber-400 text-sm font-semibold uppercase tracking-widest mb-2">Mengapa OTONADI?</p>
@@ -172,14 +363,14 @@
     </div>
   </section>
 
-  <!-- KONTAK -->
+  <!-- ══════════════════ KONTAK ══════════════════ -->
   <section id="kontak" class="py-20 px-6 bg-gray-50">
     <div class="max-w-4xl mx-auto text-center">
       <p class="text-amber-500 text-sm font-semibold uppercase tracking-widest mb-2">Lokasi & Kontak</p>
       <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-10">Kunjungi Showroom Kami</h2>
       <div class="grid md:grid-cols-2 gap-6">
         <div class="bg-white rounded-2xl p-8 shadow-sm text-left flex gap-4 items-start">
-          <div class="bg-amber-100 rounded-xl p-3 mt-1">
+          <div class="bg-amber-100 rounded-xl p-3 mt-1 flex-shrink-0">
             <svg class="w-6 h-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
@@ -191,7 +382,7 @@
           </div>
         </div>
         <div class="bg-white rounded-2xl p-8 shadow-sm text-left flex gap-4 items-start">
-          <div class="bg-green-100 rounded-xl p-3 mt-1">
+          <div class="bg-green-100 rounded-xl p-3 mt-1 flex-shrink-0">
             <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 24 24">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
@@ -206,9 +397,8 @@
         </div>
       </div>
 
-      <!-- CTA WA -->
       <div class="mt-10">
-        <a href="https://wa.me/6285934613737?text=Halo%20OTONADI%2C%20saya%20ingin%20tanya-tanya%20soal%20mobil%20yang%20tersedia."
+        <a href="https://wa.me/6285934613737?text=Halo%20Otonadi%2C%20saya%20ingin%20tanya-tanya%20soal%20mobil%20yang%20tersedia."
            target="_blank"
            class="inline-flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white font-semibold px-8 py-4 rounded-full transition text-sm shadow-lg shadow-green-200">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -218,12 +408,15 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ══════════════════ FOOTER ══════════════════ -->
   <footer class="bg-slate-900 text-slate-400 py-8 px-6 text-center text-sm">
     <p class="font-bold text-white text-lg tracking-widest mb-1">OTO<span class="text-amber-400">NADI</span></p>
     <p>Jl. Gunung Sanghyang No. 196, Denpasar, Bali</p>
     <p class="mt-1">&copy; 2025 OTONADI. All rights reserved.</p>
   </footer>
+
+  <!-- Bootstrap 5 JS (required for Carousel) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
